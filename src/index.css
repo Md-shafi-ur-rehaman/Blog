@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    li{
+        @apply p-2 rounded-lg
+    }
+    li:hover{
+        @apply border-solid	border-indigo-400
+    }
+    button {
+        @apply border
+    }
+    ul{
+        padding: 0;
+        list-style: none;
+    }
+    p{
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        @apply antialiased	 whitespace-normal
+    }
+}
