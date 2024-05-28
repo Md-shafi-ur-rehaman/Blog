@@ -10,12 +10,11 @@ function Blogs(){
 
     const article = [];
     if(blogs){
-
       blogs.forEach((item, i) => {
         console.log('Filter function is running ...');
         if(item.title.toLowerCase().indexOf(inputValue.toLowerCase()) === -1) return;
         article.push(
-          <BlogBox id={item.id} title={item.title} coverImg={item.coverImg} index={i} key={i} />
+          <BlogBox id={item.id} title={item.title} coverImg={item.cover_image} index={i} key={i} />
         );
       })
 

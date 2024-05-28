@@ -1,36 +1,50 @@
 import { useState, useContext } from "react";
 import { useNavigate  } from "react-router-dom";
-import { useAuth } from "../Hooks/AuthProvider";
+import { useAuth } from "../Hooks/useAuth";
+import PropTypes from 'prop-types';
 
 
-function Login(props){
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+function Login({ setToken }){
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    const [authorName, setAuthorName] = useState('john doe');
-    const [isPending, setIsPending] = useState(false);
+    const {login} = useAuth();
 
-    const auth = useAuth();
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      // try{
+      //   const response = await fetch('http://localhost:3000/login', {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json'
+      //       },
+      //       body: JSON.stringify({userName,password}),
+      //     });
+      //     if(!response.ok){
+      //       throw new Error('cant login')
+      //     }
+      //     const token = await  response.json();
+      //     console.log(token);
+      //     setToken({"token":"124"});
+      // }
+      // catch(err){
+      //   console.log(err)
+      // }
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        if(true){
-          console.log(auth);
-          if(name === '' || email === '' || password === '') return;
-          const user ={name,email,password}
-          auth.login(user);
-          setName('');
-          setEmail('');
-          setPassword('');
-        }
+      if (userName === "user" && password === "password") {
+        // Replace with actual authentication logic
+        await login({ userName });
+      } else {
+        alert("Invalid username or password");
+      }
+
     }
 
     return(
         <div className="w-full bg-indigo p-8 ">
             <h1 className="text-center font-bold text-2xl mb-6">Login</h1>
             <form onSubmit={handleSubmit} className="w-full flex flex-col sm:px-20 md:px-30 lg:px-80">
-                <label htmlFor="">name</label>
+                <label htmlFor="">user name</label>
                 <input
                     className="border rounded-md p-2 mb-2"
                     type="text"
@@ -38,20 +52,10 @@ function Login(props){
                     id="name"
                     required
                     placeholder="name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
+                    value={userName}
+                    onChange={e => setUserName(e.target.value)}
                 />
-                <label htmlFor="">Email</label>
-                <input
-                    className="border rounded-md p-2 mb-2"
-                    type="email"
-                    name="email"
-                    id="email"
-                    required
-                    placeholder="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
+
                 <label htmlFor="">Password</label>
                 <input
                     className="border rounded-md p-2 mb-2"
@@ -63,17 +67,11 @@ function Login(props){
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                    { !isPending
-                      ?
-                      <input
-                        className="border rounded-md p-2 bg-black text-white cursor-pointer"
-                        type="submit"
-                        value="Create"
-                      />
-                      :
-                      <button className="border rounded-md p-2 bg-black text-white" disabled>Creating user</button>
-                    }
-
+                <input
+                  className="border rounded-md p-2 bg-black text-white cursor-pointer"
+                  type="submit"
+                  value="Login"
+                />
             </form>
         </div>
     )

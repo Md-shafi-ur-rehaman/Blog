@@ -37,10 +37,10 @@ function Article(){
                 gap-8  px-4 pt-5 lg:pt-8 text-black">
 
                     <div className="sm:col-span-2 ">
-                        <img src={article.coverImg} alt="img" className="h-56 w-full object-cover" />
+                        <img src={article.cover_image} alt="img" className="h-56 w-full object-cover" />
                         <h1 className="font-bold text-2xl my-1 pt-5">{article.title}</h1>
                         <div className="pt-5">
-                            <p className="text-lg font-normal indent-8	text-justify antialiased">{article.body}</p>
+                            <p className="text-lg font-normal indent-8	text-justify antialiased">{article.content}</p>
                         </div>
                     </div>
 

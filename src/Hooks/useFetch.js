@@ -8,7 +8,7 @@ function useFetch(url){
         async function fet(){
             try{
                 const response = await fetch(url);
-                // console.log(response.json());
+                
                 if(!response.ok){
                     throw new Error("cannot fetch data");
                 }

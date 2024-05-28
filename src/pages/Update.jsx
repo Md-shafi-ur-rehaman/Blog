@@ -9,18 +9,17 @@ function Update({article}){
     const [isPending, setIsPending] = useState(false);
 
     const [title, setTitle] = useState(article.title);
-    const [body, setbody] = useState(article.body);
-    const [coverImg, setCoverImg] = useState(article.coverImg);
-    const [authorName, setAuthorName] = useState(article.authorName);
+    const [content, setContent] = useState(article.content);
+    const [cover_image, setCover_image] = useState(article.cover_image);
 
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-
-        const blog ={title,body,coverImg,authorName}
+        const last_updated_date = new Date().toISOString();
+        const blog ={title,content,cover_image,last_updated_date};
         setTitle('');
-        setbody('');
-        setAuthorName('');
+        setContent('');
+        setCover_image('')
         setIsPending(true);
         try{
           const response = await fetch(`http://localhost:3000/blogs/${article.id}`,{
@@ -65,8 +64,8 @@ function Update({article}){
                     rows="10"
                     required
                     placeholder="Blog body here.."
-                    value={body}
-                    onChange={(e)=> setbody(e.target.value)}
+                    value={content}
+                    onChange={(e)=> setContent(e.target.value)}
                 ></textarea>
                 <label htmlFor="">Blog cover image</label>
                 <input
@@ -76,29 +75,15 @@ function Update({article}){
                     id="title"
                     required
                     placeholder="Title here.."
-                    value={coverImg}
-                    onChange={(e) => setCoverImg(e.target.value)}
+                    value={cover_image}
+                    onChange={(e) => setCover_image(e.target.value)}
                 />
-                <label htmlFor="">Select author name</label>
-                <div className="flex justify-between">
-                    <select
-                        className="border rounded-md p-2 w-[80%] "
-                        name="authorName"
-                        id=""
-                        value={authorName}
-                        onChange={(e)=> setAuthorName(e.target.value)}
-                    >
-                        <option value='jonh doe'>john doe</option>
-                        <option value='alexa'>alexa</option>
-                    </select>
-                    { !isPending
-                      ?
-                      <button onClick={handleSubmit} className="border rounded-md p-2 bg-black text-white cursor-pointer">Update</button>
-                      :
-                      <button className="border rounded-md p-2 bg-black text-white" disabled>Updating blog...</button>
-                    }
-                </div>
-
+                { !isPending
+                  ?
+                  <button onClick={handleSubmit} className="border rounded-md p-2 bg-black text-white cursor-pointer">Update</button>
+                  :
+                  <button className="border rounded-md p-2 bg-black text-white" disabled>Updating blog...</button>
+                }
             </form>
           </div>
         </div>
